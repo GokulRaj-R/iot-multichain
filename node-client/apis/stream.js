@@ -1,6 +1,8 @@
 const express = require("express");
 const aesjs = require("aes-js");
-const { rpcUser, rpcPass, rpcPort, rpcHost, aesKey } = require("../configs/config");
+const getAesKey = require("../utils/getAesKey");
+const config = require("../configs/config");
+const { rpcUser, rpcPass, rpcPort, rpcHost } = config;
 const mchain = require("multichain-node")({
     port: rpcPort,
     host: rpcHost,
@@ -13,10 +15,9 @@ const router = express.Router();
 /**
  * @param {hexString} data encrypted data 
  */
-const decryptWithAesKey = (data) => {
-    const encryptedHex = data;
+const decryptWithAesKey = (encryptedHex, aesKey) => {
     const encryptedBytes = aesjs.utils.hex.toBytes(encryptedHex);
-    const aesCtr = new aesjs.ModeOfOperation.ctr(key);
+    const aesCtr = new aesjs.ModeOfOperation.ctr(aesKey);
     const decryptedBytes = aesCtr.decrypt(encryptedBytes);
     const decryptedData = aesjs.utils.utf8.fromBytes(decryptedBytes);
     return JSON.parse(decryptedData);
@@ -39,15 +40,16 @@ router.get("/:stream", (req, res) => {
                 start: start,
                 'local-ordering': true
             },
-            (err, result) => {
+            async (err, result) => {
                 if (err) {
                     console.log(err);
                     return res.status(400).json(err);
                 }
 
-                // const data = result.map(ele => ({...ele.data.json}));
+                config.aesKey = config.aesKey || await getAesKey();
+                console.log(config.aesKey);
                 const data = result.map(ele => {
-                    return decryptWithAesKey(ele.data.json.encryptedHex);
+                    return decryptWithAesKey(ele.data.json.encryptedHex, config.aesKey);
                 });
 
                 return res.json(data);
@@ -107,14 +109,15 @@ router.get("/:stream/:key", (req, res) => {
                 count: count,
                 start: start,
             },
-            (err, result) => {
+            async (err, result) => {
                 if (err) {
                     console.log(err);
                     return res.status(400).json(err);
                 }
 
+                config.aesKey = config.aesKey || await getAesKey();
                 const data = result.map(ele => {
-                    return decryptWithAesKey(ele.data.json.encryptedHex);
+                    return decryptWithAesKey(ele.data.json.encryptedHex, config.aesKey);
                 });
                 return res.json(data);
             }
