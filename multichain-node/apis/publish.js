@@ -1,7 +1,8 @@
 const express = require("express");
-const crypto = require("cryto");
+const crypto = require("crypto");
 const { body, validationResult } = require("express-validator");
 const pubToMultichain = require("../multichainPub")
+const config = require("../configs/config")
 
 const router = express.Router();
 
@@ -14,23 +15,27 @@ const encryptStringWithRsaPublicKey = function (toEncrypt, publicKey) {
 router.post(
     "/",
     // body("stream", "Stream is required").notEmpty(),
-    body("name", "Key is required").notEmpty(),
+    body("name", "Name is required").notEmpty(),
     // Data is required and must be a JSON object
-    body("publicKey", "Data is required")
+    body("publicKey", "Public Key is required")
         .notEmpty(),
     (req, res) => {
+
+        console.log(req.body);
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             console.log(errors.array());
             return res.status(400).json({ errors: errors.array() });
         }
 
-        console.log(req.body);
-        const { name, publicKey } = req.body;
-        pubToMultichain(config.publicKeyStream, name, { publicKey });
+        let { name, publicKey } = req.body;
+        pubToMultichain(config.publicKeyStream, name, { name, publicKey });
 
+        publicKey = Buffer.from(publicKey, 'base64').toString('utf8');
         const encryptedAESKey = encryptStringWithRsaPublicKey(config.aesKey, publicKey);
-        pubToMultichain(config.authorizedNodeStream, name, { encryptedAESKey });
+        pubToMultichain(config.authorizedNodeStream, name, { name, encryptedAESKey });
+
+        res.json({msg: "Public Key published to multichain"});
     }
 );
 

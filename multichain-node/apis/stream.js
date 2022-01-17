@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { rpcUser, rpcPass, rpcPort, rpcHost } = require("../configs/config");
+
 const mchain = require("multichain-node")({
 	port: rpcPort,
 	host: rpcHost,

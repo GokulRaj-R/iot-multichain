@@ -17,8 +17,7 @@ const config = {
     authorizedNodeStream: AUTHORIZED_NODE_STREAM
 };
 
-
-
+module.exports = config;
 
 
 
