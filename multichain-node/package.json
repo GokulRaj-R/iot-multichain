@@ -9,7 +9,6 @@
     },
     "dependencies": {
         "aes-js": "^3.1.2",
-        "crypto": "^1.0.1",
         "express": "^4.17.1",
         "express-validator": "^6.12.1",
         "mqtt": "^4.2.8",
