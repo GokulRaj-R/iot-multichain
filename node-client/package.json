@@ -4,8 +4,13 @@
   "description": "Client app for retrieving data from multichain",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config index.js"
+  },
   "dependencies": {
     "aes-js": "^3.1.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^14.1.0",
     "express": "^4.17.2",
     "multichain-node": "^2.2.0-version1.0.4"
   },
