@@ -11,7 +11,7 @@ services:
         container_name: node-master
         build: ./multichain-node
         ports:
-            - 8000:3001
+            - 3001:3001
         env_file:
             - ./multichain-node/.env
         depends_on:
