@@ -27,6 +27,12 @@ const getAesKey = () => {
                 if (err) {
                     console.log(err);
                     reject(err)
+                    return ;
+                }
+
+                if (!result.length) {
+                    reject('Permission Denied');
+                    return ;
                 }
 
                 let encryptedAESKey = result[0].data.json.encryptedAESKey;

@@ -48,9 +48,8 @@ router.get("/:stream", (req, res) => {
                 }
 
                 try {
-                    config.aesKey = config.aesKey || await getAesKey();
-
                     if (decryptedStreams.indexOf(stream) == -1) {
+                        config.aesKey = config.aesKey || await getAesKey();
                         const data = result.map(ele => {
                             return decryptWithAesKey(ele.data.json.encryptedHex, config.aesKey);
                         });
@@ -61,7 +60,7 @@ router.get("/:stream", (req, res) => {
                     return res.json(data);
                 } catch (err) {
                     console.log(err);
-                    return res.status(403);
+                    return res.status(403).json(err);
                 }
             }
         );
@@ -126,9 +125,8 @@ router.get("/:stream/:key", (req, res) => {
                 }
 
                 try {
-                    config.aesKey = config.aesKey || await getAesKey();
-
                     if (decryptedStreams.indexOf(stream) == -1) {
+                        config.aesKey = config.aesKey || await getAesKey();
                         const data = result.map(ele => {
                             return decryptWithAesKey(ele.data.json.encryptedHex, config.aesKey);
                         });
@@ -139,7 +137,7 @@ router.get("/:stream/:key", (req, res) => {
                     return res.json(data);
                 } catch (err) {
                     console.log(err);
-                    return res.status(403);
+                    return res.status(403).json(err);
                 }
             }
         );
