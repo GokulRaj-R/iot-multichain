@@ -2,7 +2,7 @@ const express = require("express");
 const aesjs = require("aes-js");
 const getAesKey = require("../utils/getAesKey");
 const config = require("../configs/config");
-const { rpcUser, rpcPass, rpcPort, rpcHost } = config;
+const { rpcUser, rpcPass, rpcPort, rpcHost, authorizedNodeStream, publicKeyStream } = config;
 const mchain = require("multichain-node")({
     port: rpcPort,
     host: rpcHost,
@@ -11,6 +11,7 @@ const mchain = require("multichain-node")({
 });
 
 const router = express.Router();
+const decryptedStreams = [authorizedNodeStream, publicKeyStream];
 
 /**
  * @param {hexString} data encrypted data 
@@ -46,13 +47,22 @@ router.get("/:stream", (req, res) => {
                     return res.status(400).json(err);
                 }
 
-                config.aesKey = config.aesKey || await getAesKey();
-                console.log(config.aesKey);
-                const data = result.map(ele => {
-                    return decryptWithAesKey(ele.data.json.encryptedHex, config.aesKey);
-                });
+                try {
+                    config.aesKey = config.aesKey || await getAesKey();
 
-                return res.json(data);
+                    if (decryptedStreams.indexOf(stream) == -1) {
+                        const data = result.map(ele => {
+                            return decryptWithAesKey(ele.data.json.encryptedHex, config.aesKey);
+                        });
+                    } else {
+                        const data = result.map(ele => ele.data.json)
+                    }
+
+                    return res.json(data);
+                } catch (err) {
+                    console.log(err);
+                    return res.status(403);
+                }
             }
         );
     } catch (err) {
@@ -115,11 +125,22 @@ router.get("/:stream/:key", (req, res) => {
                     return res.status(400).json(err);
                 }
 
-                config.aesKey = config.aesKey || await getAesKey();
-                const data = result.map(ele => {
-                    return decryptWithAesKey(ele.data.json.encryptedHex, config.aesKey);
-                });
-                return res.json(data);
+                try {
+                    config.aesKey = config.aesKey || await getAesKey();
+
+                    if (decryptedStreams.indexOf(stream) == -1) {
+                        const data = result.map(ele => {
+                            return decryptWithAesKey(ele.data.json.encryptedHex, config.aesKey);
+                        });
+                    } else {
+                        const data = result.map(ele => ele.data.json)
+                    }
+
+                    return res.json(data);
+                } catch (err) {
+                    console.log(err);
+                    return res.status(403);
+                }
             }
         );
     } catch (err) {

@@ -33,7 +33,7 @@ router.post(
 
         publicKey = Buffer.from(publicKey, 'base64').toString('utf8');
         const encryptedAESKey = encryptStringWithRsaPublicKey(config.aesKey, publicKey);
-        pubToMultichain(config.authorizedNodeStream, name, { name, encryptedAESKey });
+        pubToMultichain(config.authorizedNodeStream, name, { encryptedAESKey });
 
         res.json({msg: "Public Key published to multichain"});
     }
