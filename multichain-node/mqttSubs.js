@@ -28,7 +28,7 @@ const subsToTopic = () => {
         const jsonData = JSON.parse(payload.toString());
         const { stream, key, data } = jsonData;
         const textBytes = aesjs.utils.utf8.toBytes(JSON.stringify(data));
-        const aesCtr = new aesjs.ModeOfOperation.ctr(AES_KEY);
+        const aesCtr = new aesjs.ModeOfOperation.ctr(JSON.parse(AES_KEY));
         const encryptedBytes = aesCtr.encrypt(textBytes);
         const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
         pubToMultichain(stream, key, { encryptedHex });
