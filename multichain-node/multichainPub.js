@@ -13,6 +13,7 @@ const pubToMultichain = (stream, key, data) => {
             (err, result) => {
                 if (err) {
                     console.log(err);
+                    return ;
                 }
                 console.log("published to multichain-node");
             }

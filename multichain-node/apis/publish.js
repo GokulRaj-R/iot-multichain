@@ -39,4 +39,9 @@ router.post(
     }
 );
 
+router.get('/', (req, res) => {
+    console.log(__dirname);
+    res.sendFile(__dirname + '/form.html');
+});
+
 module.exports = router;

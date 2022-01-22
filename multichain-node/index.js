@@ -7,6 +7,7 @@ const PORT = process.env.MCBPORT || 3001;
 const subsToTopic = require('./mqttSubs')
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/publish-key", publish);
 
