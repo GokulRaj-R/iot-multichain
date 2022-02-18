@@ -16,7 +16,8 @@ done
 
 echo "Start the chain"
 # multichaind -txindex -printtoconsole -shrinkdebugfilesize -debug=mcapi -debug=mchn -debug=mccoin -debug=mcatxo -debug=mcminer -debug=mcblock -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD $CHAINNAME@$MASTER_NODE:$NETWORK_PORT
-multichaind -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD $CHAINNAME@$MASTER_NODE:$NETWORK_PORT -daemon
+multichaind -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD $CHAINNAME@$MASTER_NODE:$NETWORK_PORT
+multichaind $CHAINNAME -daemon 
 
 cat << EOF > /root/.multichain/$CHAINNAME/multichain.conf
 rpcuser=$RPC_USER
