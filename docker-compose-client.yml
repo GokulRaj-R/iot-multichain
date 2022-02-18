@@ -3,9 +3,9 @@ version: '2'
 services:
     multichain:
         container_name: multichain
-        build: ./docker-multichain/master
+        build: ./docker-multichain/node
         env_file:
-            - ./docker-multichain/master/env
+            - ./docker-multichain/node/env
 
     node-client:
         container_name: node-client
