@@ -15,7 +15,8 @@ for ip in ${RPC_ALLOW_IP//,/ } ; do
 done
 
 echo "Start the chain"
-multichaind -txindex -printtoconsole -shrinkdebugfilesize -debug=mcapi -debug=mchn -debug=mccoin -debug=mcatxo -debug=mcminer -debug=mcblock -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD $CHAINNAME@$MASTER_NODE:$NETWORK_PORT
+# multichaind -txindex -printtoconsole -shrinkdebugfilesize -debug=mcapi -debug=mchn -debug=mccoin -debug=mcatxo -debug=mcminer -debug=mcblock -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD $CHAINNAME@$MASTER_NODE:$NETWORK_PORT
+multichaind -rpcuser=$RPC_USER -rpcpassword=$RPC_PASSWORD $CHAINNAME@$MASTER_NODE:$NETWORK_PORT
 
 cat << EOF > /root/.multichain/$CHAINNAME/multichain.conf
 rpcuser=$RPC_USER

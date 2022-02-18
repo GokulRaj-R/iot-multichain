@@ -4,6 +4,8 @@ services:
     multichain:
         container_name: multichain
         build: ./docker-multichain/master
+        ports:
+            - 7447:7447
         env_file:
             - ./docker-multichain/master/env
 
