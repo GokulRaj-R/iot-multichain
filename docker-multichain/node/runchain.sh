@@ -27,4 +27,9 @@ for ip in ${RPC_ALLOW_IP//,/ } ; do
    echo "rpcallowip=$ip" >> /root/.multichain/$CHAINNAME/multichain.conf
 done
 
+( set -o posix ; set ) | sed -n '/_STREAM/p' | while read PARAM; do
+   IFS='=' read -ra KV <<< "$PARAM"
+   multichain-cli $CHAINNAME subscribe ${KV[1]} 
+   sleep 3
+done 
 tail -f /dev/null

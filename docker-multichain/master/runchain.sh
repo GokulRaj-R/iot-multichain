@@ -70,13 +70,13 @@ cp /root/.multichain/$CHAINNAME/multichain.conf /root/.multichain/multichain.con
 
 multichaind $CHAINNAME -daemon
 sleep 5
-multichain-cli $CHAINNAME create stream $DATA_STREAM '{"restrict":"write"}'
+multichain-cli $CHAINNAME create stream $DATA_STREAM true
 multichain-cli $CHAINNAME subscribe $DATA_STREAM
 
-multichain-cli $CHAINNAME create stream $PUBLIC_KEY_STREAM '{"restrict":"write"}'
+multichain-cli $CHAINNAME create stream $PUBLIC_KEY_STREAM true
 multichain-cli $CHAINNAME subscribe $PUBLIC_KEY_STREAM
 
-multichain-cli $CHAINNAME create stream $AUTHORIZED_NODE_STREAM '{"restrict":"write"}'
+multichain-cli $CHAINNAME create stream $AUTHORIZED_NODE_STREAM true
 multichain-cli $CHAINNAME subscribe $AUTHORIZED_NODE_STREAM
 
 tail -f /dev/null
