@@ -8,3 +8,8 @@ RPC_USER=multichainrpc
 RPC_PASSWORD=79pgKQusiH3VDVpyzsM6e3kRz6gWNctAwgJvymG3iiuz
 RPC_ALLOW_IP=0.0.0.0/0.0.0.0
 
+PARAM_CONNECT='anyone-can-connect|true'
+PARAM_RECEIVE='anyone-can-receive|true'
+PARAM_SEND='anyone-can-send|true'
+PARAM_CREATE='anyone-can-create|true'
+PARAM_ACTIVATE='anyone-can-activate|true'
