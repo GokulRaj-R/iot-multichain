@@ -27,6 +27,7 @@ const subsToTopic = () => {
     client.on("message", (topic, payload) => {
         const jsonData = JSON.parse(payload.toString());
         const { stream, key, data } = jsonData;
+        console.log(jsonData);
         const textBytes = aesjs.utils.utf8.toBytes(JSON.stringify(data));
         const aesCtr = new aesjs.ModeOfOperation.ctr(JSON.parse(AES_KEY));
         const encryptedBytes = aesCtr.encrypt(textBytes);

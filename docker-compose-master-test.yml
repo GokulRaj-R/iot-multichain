@@ -4,18 +4,20 @@ services:
     multichain:
         container_name: multichain
         build: ./docker-multichain/master
+        ports:
+            - 8000:8000
         env_file:
             - ./docker-multichain/master/env
 
-    node-master:
-        container_name: node-master
-        build: ./multichain-node
-        ports:
-            - 3001:3001
-        env_file:
-            - ./multichain-node/.env
-        depends_on:
-            - mqtt
+    # node-master:
+    #     container_name: node-master
+    #     build: ./multichain-node
+    #     ports:
+    #         - 3001:3001
+    #     env_file:
+    #         - ./multichain-node/.env
+    #     depends_on:
+    #         - mqtt
 
     node-client:
         container_name: node-client
