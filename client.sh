@@ -49,9 +49,6 @@ echo "CHAINNAME=$chainName" >> docker-multichain/node/env
 echo "HOST_NAME=$clientName" >> node-client/.env
 echo "PRIVATE_KEY=$privateKey" >> node-client/.env
 
-echo "Running docker containers"
-docker-compose -f docker-compose-client.yml -p iot-client up
-
 BLUE='\033[0;34m' # Blue Color
 GRE='\033[0;32m' # Green Color
 NC='\033[0m' # No Color
@@ -60,5 +57,8 @@ echo "==============================="
 echo -e "${BLUE}PUBLIC_KEY${NC}"
 echo "==============================="
 echo -e "${GRE}$publicKey${NC}"
+
+echo "Running docker containers"
+docker-compose -f docker-compose-client.yml -p iot-client up
 
 
