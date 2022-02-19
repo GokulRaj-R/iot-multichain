@@ -70,14 +70,21 @@ cp /root/.multichain/$CHAINNAME/multichain.conf /root/.multichain/multichain.con
 
 multichaind $CHAINNAME -daemon
 sleep 5
-multichain-cli $CHAINNAME create stream $DATA_STREAM true
-multichain-cli $CHAINNAME subscribe $DATA_STREAM
+# multichain-cli $CHAINNAME create stream $DATA_STREAM true
+# multichain-cli $CHAINNAME subscribe $DATA_STREAM
 
-multichain-cli $CHAINNAME create stream $PUBLIC_KEY_STREAM true
-multichain-cli $CHAINNAME subscribe $PUBLIC_KEY_STREAM
+# multichain-cli $CHAINNAME create stream $PUBLIC_KEY_STREAM true
+# multichain-cli $CHAINNAME subscribe $PUBLIC_KEY_STREAM
 
-multichain-cli $CHAINNAME create stream $AUTHORIZED_NODE_STREAM true
-multichain-cli $CHAINNAME subscribe $AUTHORIZED_NODE_STREAM
+# multichain-cli $CHAINNAME create stream $AUTHORIZED_NODE_STREAM true
+# multichain-cli $CHAINNAME subscribe $AUTHORIZED_NODE_STREAM
+
+( set -o posix ; set ) | sed -n '/_STREAM/p' | while read PARAM; do
+   IFS='=' read -ra KV <<< "$PARAM"
+   multichain-cli $CHAINNAME create stream ${KV[1]} true
+   multichain-cli $CHAINNAME subscribe ${KV[1]} 
+   sleep 3
+done 
 
 tail -f /dev/null
 #multichaind -txindex -shrinkdebugfilesize -printtoconsole -debug=mcapi -debug=mchn -debug=mccoin -debug=mcatxo -debug=mcminer -debug=mcblock $CHAINNAME

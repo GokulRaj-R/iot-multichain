@@ -12,3 +12,7 @@ PARAM_RECEIVE=anyone-can-receive|true
 PARAM_SEND=anyone-can-send|true
 PARAM_CREATE=anyone-can-create|true
 PARAM_ACTIVATE=anyone-can-activate|true
+SENSOR1_STREAM=sensor1
+SENSOR2_STREAM=sensor2
+SENSOR3_STREAM=sensor3
+SENSOR4_STREAM=sensor4
