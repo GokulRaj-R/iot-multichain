@@ -1,0 +1,21 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "Backend server for multichain node",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "dev": "nodemon -r dotenv/config index.js",
+        "prod": "node index.js"
+    },
+    "dependencies": {
+        "aes-js": "^3.1.2",
+        "express": "^4.17.1",
+        "express-validator": "^6.12.1",
+        "multichain-node": "^2.2.0-version1.0.4"
+    },
+    "devDependencies": {
+        "dotenv": "^10.0.0",
+        "nodemon": "^2.0.12"
+    }
+}

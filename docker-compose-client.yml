@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+    multichain:
+        container_name: multichain
+        build: ./docker-multichain/node
+        env_file:
+            - ./docker-multichain/node/env
+
+    node-client:
+        container_name: node-client
+        build: ./node-client
+        ports:
+            - 80:3002
+        depends_on:
+            - multichain
+        env_file:
+            - ./node-client/.env
