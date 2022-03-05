@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/publish-key", publish);
 
 app.get("/", (req, res) => {
-    res.send("Multichain master node listening to public keys");
+    res.send("Multichain master node listening for public keys");
 });
 
 app.listen(PORT, () => {

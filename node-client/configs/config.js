@@ -6,7 +6,8 @@ const {
     PUBLIC_KEY_STREAM,
     AUTHORIZED_NODE_STREAM,
     PRIVATE_KEY,
-    HOST_NAME
+    HOST_NAME,
+    PUBLIC_KEY
 } = process.env;
 
 const config = {
@@ -17,7 +18,8 @@ const config = {
     publicKeyStream: PUBLIC_KEY_STREAM,
     authorizedNodeStream: AUTHORIZED_NODE_STREAM,
     hostName: HOST_NAME,
-    privateKey: PRIVATE_KEY
+    privateKey: PRIVATE_KEY,
+    publicKey: PUBLIC_KEY
 };
 
 module.exports = config;

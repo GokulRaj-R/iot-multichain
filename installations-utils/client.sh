@@ -96,6 +96,7 @@ echo "NETWORK_PORT=$networkPort" >> multichain/node/env
 echo "CHAINNAME=$chainName" >> multichain/node/env
 echo "HOST_NAME=$clientName" >> node-client/.env
 echo "PRIVATE_KEY=$privateKey" >> node-client/.env
+echo "PUBLIC_KEY=$publicKey" >> node-client/.env
 
 BLUE='\033[0;34m' # Blue Color
 GRE='\033[0;32m' # Green Color
