@@ -32,11 +32,15 @@ router.post(
         pubToMultichain(config.publicKeyStream, name, { name, publicKey });
 
         // TODO: Catch exceptions thrown because of invalid public keys
-        publicKey = Buffer.from(publicKey, 'base64').toString('utf8');
-        const encryptedAESKey = encryptStringWithRsaPublicKey(config.aesKey, publicKey);
-        pubToMultichain(config.authorizedNodeStream, name, { encryptedAESKey });
-
-        res.json({msg: "Public Key published to multichain"});
+        try {
+            publicKey = Buffer.from(publicKey, 'base64').toString('utf8');
+            const encryptedAESKey = encryptStringWithRsaPublicKey(config.aesKey, publicKey);
+            pubToMultichain(config.authorizedNodeStream, name, { encryptedAESKey });
+            res.json({msg: "Public Key published to multichain"});
+        } catch(err) {
+            console.log(err);
+            res.status(500).send({msg: "Internal server error"});
+        }
     }
 );
 
