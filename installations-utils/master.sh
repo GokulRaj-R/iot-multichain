@@ -37,6 +37,7 @@ then
     if [ $1 == "-stop" ]
     then
         docker-compose -f iot-multichain/docker-compose-master.yml -p iot-master down --rmi all
+        rm -r iot-multichain
     elif [ $1 == "--help" ] 
     then
         usagefull
@@ -89,6 +90,7 @@ echo "Exporting keys to environment variables"
 export PUBLIC_KEY=$publicKey
 export PRIVATE_KEY=$privateKey
 
+echo "CHAINNAME=$chainName" >> multichain/master/env
 echo "HOST_NAME=$hostName" >> node-client/.env
 echo "PRIVATE_KEY=$privateKey" >> node-client/.env
 echo "PUBLIC_KEY=$publicKey" >> node-client/.env
