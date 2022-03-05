@@ -3,11 +3,11 @@ version: '2'
 services:
     multichain:
         container_name: multichain
-        build: ./docker-multichain/master
+        build: ./multichain/master
         ports:
             - 7447:7447
         env_file:
-            - ./docker-multichain/master/env
+            - ./multichain/master/env
 
     node-master:
         container_name: node-master
