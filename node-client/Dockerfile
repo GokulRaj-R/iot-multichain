@@ -5,5 +5,5 @@ WORKDIR /home/node/app
 COPY ./ ./
 
 USER node
-RUN sudo yarn install
+RUN yarn install
 CMD ["yarn", "run", "prod"]
