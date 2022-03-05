@@ -49,7 +49,7 @@ then
     exit
 fi
 
-read -p "Client name: " clientName
+read -p "Client name: " hostName
 read -p "Chain name: " chainName
 
 echo "Updating package sources"
@@ -89,8 +89,9 @@ echo "Exporting keys to environment variables"
 export PUBLIC_KEY=$publicKey
 export PRIVATE_KEY=$privateKey
 
-echo "HOST_NAME=$clientName" >> node-client/.env
+echo "HOST_NAME=$hostName" >> node-client/.env
 echo "PRIVATE_KEY=$privateKey" >> node-client/.env
+echo "PUBLIC_KEY=$publicKey" >> node-client/.env
 
 BLUE='\033[0;34m' # Blue Color
 GRE='\033[0;32m' # Green Color

@@ -13,8 +13,8 @@ app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
     res.render("index", {
-        hostName: hostName,
-        publicKey: publicKey
+        hostName: config.hostName,
+        publicKey: config.publicKey
     });
 });
 
