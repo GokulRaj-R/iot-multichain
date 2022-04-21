@@ -56,13 +56,13 @@ read -p "Master Node network port for connections: " networkPort
 read -p "Chain name: " chainName
 
 echo "Updating package sources"
-apt -y update && apt -y upgrade
+apt -y update # && apt -y upgrade
 
 echo "Installing git, node, docker and docker compose"
 apt -y install docker.io
 apt -y install docker-compose
 apt -y install git
-apt -y install node
+apt -y install nodejs
 
 echo "Cloning source files"
 # git clone 'https://github.com/GokulRaj-R/iot-multichain.git'
