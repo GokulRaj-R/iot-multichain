@@ -54,7 +54,7 @@ read -p "Client name: " hostName
 read -p "Chain name: " chainName
 
 echo "Updating package sources"
-apt -y update && apt -y upgrade
+apt -y update # && apt -y upgrade
 
 echo "Installing git, node, docker and docker compose"
 apt -y install docker.io
