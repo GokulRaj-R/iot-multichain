@@ -31,7 +31,7 @@ services:
 
     mqtt:
         container_name: mqtt
-        image: eclipse-mosquitto:latest
+        image: eclipse-mosquitto:openssl
         volumes:
             - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
         ports:
